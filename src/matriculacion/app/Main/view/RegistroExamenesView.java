@@ -2,11 +2,9 @@ package matriculacion.app.Main.view;
 
 import javax.swing.*;
 
-public class RegistroSolicitanteView {
+public class RegistroExamenesView {
     private JTextField textField1;
     private JTextField textField2;
-    private JComboBox comboBox1;
-    private JButton guardarButton;
-    private JButton limpiarButton;
+    private JButton guardarResultadosButton;
     private JButton regresarButton;
 }
