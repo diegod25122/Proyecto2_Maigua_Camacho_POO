@@ -6,4 +6,6 @@ public class MenuAnalistaView {
     private JButton GESTIÓNDEUSUARIOSButton;
     private JButton REPORTESButton;
     private JButton CERRARSESIÓNButton;
+
+    MenuAnalistaView(){}
 }
