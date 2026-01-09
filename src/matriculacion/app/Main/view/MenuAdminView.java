@@ -11,11 +11,10 @@ public class MenuAdminView extends JFrame{
     private JLabel nombreUserA;
     private JLabel rolA;
     private JLabel lblTitulo;
-    private JButton GESTIONDEUSUARIOS;
-    private JButton GENERARLICENCIAButton;
-    private JButton GESTIONDETRAMITESButton;
-    private JButton REGISTRAREXAMENESButton;
-    private JButton VERIFICARREQUISITOSButton;
+    private JButton btnGenerarLicencia;
+    private JButton btnGestionTramites;
+    private JButton btnRegistrarExamenes;
+    private JButton btnVerificar;
     private JButton btnRegistrarSolicitante;
 
     MenuAdminView(String nombre, String rol){
@@ -25,7 +24,7 @@ public class MenuAdminView extends JFrame{
 
          //Configuracion de la ventana
         setTitle("Menu Admin");
-        setSize(300,300);
+        setSize(400,400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(null);
@@ -46,22 +45,37 @@ public class MenuAdminView extends JFrame{
         add(rolA);
 
         //===== BOTONES =======
-        JButton btnRegistrarSolicitante = new JButton("REGISTRAR SOLICITANTE");
+        JButton btnRegistrarSolicitante = new JButton("Registrar Solicitante");
+        JButton btnVerificar = new JButton("Verificar");
+        JButton btnRegistrarExamenes = new JButton("Registrar Examenes");
+        JButton btnGestionTramites = new JButton("Gestion Tramites");
+       JButton btnGenerarLicencia = new JButton("Generar Licencia");
         JButton btnGestUsuarios= new  JButton("Gestionar Usuarios");
-        JButton btnReportes = new JButton("Reportes");
+        JButton btnReportes = new JButton("Reportes y Estadísticas");
         JButton btnCerrarSesión= new JButton("Cerrar Sesión");
-
 
         int x = 60;
         int y = 120;
         int w = 280;
         int h = 35;
         int gap = 45;
+
         btnRegistrarSolicitante.setBounds(x,y,w,h);
+        btnVerificar.setBounds(x,y+gap*3,w,h);
+        btnRegistrarExamenes.setBounds(x,y+gap*4,w,h);
+        btnGestionTramites.setBounds(x,y+gap*5,w,h);
+        btnGenerarLicencia.setBounds(x,y+gap*6,w,h);
         btnGestUsuarios.setBounds(x,y,w,h);
         btnReportes.setBounds(x,y+gap,w,h);
         btnCerrarSesión.setBounds(x,y+gap*2,w,h);
+
+
+
         add(btnRegistrarSolicitante);
+        add(btnVerificar);
+        add(btnRegistrarExamenes);
+        add(btnGestionTramites);
+        add(btnGenerarLicencia);
         add(btnGestUsuarios);
         add(btnReportes);
         add(btnCerrarSesión);
