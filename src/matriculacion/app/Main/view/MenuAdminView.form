@@ -8,7 +8,7 @@
     <properties/>
     <border type="none"/>
     <children>
-      <component id="2683b" class="javax.swing.JLabel">
+      <component id="2683b" class="javax.swing.JLabel" binding="lblTitulo">
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -42,7 +42,7 @@
         <properties/>
         <border type="none" title=""/>
         <children>
-          <component id="f3314" class="javax.swing.JLabel">
+          <component id="f3314" class="javax.swing.JLabel" binding="rolUser">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -50,7 +50,7 @@
               <text value="ROL:"/>
             </properties>
           </component>
-          <component id="56ba7" class="javax.swing.JButton" binding="REGISTRARSOLICITANTEButton" default-binding="true">
+          <component id="56ba7" class="javax.swing.JButton" binding="btnRegistrar">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -58,7 +58,7 @@
               <text value="REGISTRAR SOLICITANTE"/>
             </properties>
           </component>
-          <component id="6a9fd" class="javax.swing.JButton" binding="VERIFICARREQUISITOSButton" default-binding="true">
+          <component id="6a9fd" class="javax.swing.JButton" binding="btnVerificar">
             <constraints>
               <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -66,15 +66,7 @@
               <text value="VERIFICAR REQUISITOS"/>
             </properties>
           </component>
-          <component id="12b69" class="javax.swing.JButton" binding="REGISTRAREXÁMENESButton" default-binding="true">
-            <constraints>
-              <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <text value="REGISTRAR EXÁMENES"/>
-            </properties>
-          </component>
-          <component id="bf35f" class="javax.swing.JButton" binding="GESTIÓNDETRÁMITESButton" default-binding="true">
+          <component id="bf35f" class="javax.swing.JButton" binding="btnGestTramites">
             <constraints>
               <grid row="4" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -82,7 +74,7 @@
               <text value="GESTIÓN DE TRÁMITES"/>
             </properties>
           </component>
-          <component id="19e6b" class="javax.swing.JButton" binding="GENERARLICENCIAButton" default-binding="true">
+          <component id="19e6b" class="javax.swing.JButton" binding="btnGenerarLice">
             <constraints>
               <grid row="5" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -90,7 +82,7 @@
               <text value="GENERAR LICENCIA"/>
             </properties>
           </component>
-          <component id="e811f" class="javax.swing.JButton" binding="CERRARSESIÓNButton" default-binding="true">
+          <component id="e811f" class="javax.swing.JButton" binding="btnCerrarSesion">
             <constraints>
               <grid row="6" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -98,12 +90,12 @@
               <text value="CERRAR SESIÓN"/>
             </properties>
           </component>
-          <component id="c4d89" class="javax.swing.JLabel" binding="rolUser">
+          <component id="12b69" class="javax.swing.JButton" binding="btnRegistrarExamen">
             <constraints>
-              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Label"/>
+              <text value="REGISTRAR EXÁMENES"/>
             </properties>
           </component>
         </children>

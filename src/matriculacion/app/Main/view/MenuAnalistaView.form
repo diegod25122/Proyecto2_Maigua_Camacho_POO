@@ -8,7 +8,7 @@
     <properties/>
     <border type="none"/>
     <children>
-      <component id="a4d7a" class="javax.swing.JLabel">
+      <component id="a4d7a" class="javax.swing.JLabel" binding="lblTitulo">
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -21,7 +21,7 @@
           <grid row="3" column="1" row-span="2" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
         </constraints>
       </vspacer>
-      <component id="9a701" class="javax.swing.JLabel">
+      <component id="9a701" class="javax.swing.JLabel" binding="nombreUserA">
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -29,7 +29,7 @@
           <text value="👤 Nombre de usuario"/>
         </properties>
       </component>
-      <component id="1e798" class="javax.swing.JLabel">
+      <component id="1e798" class="javax.swing.JLabel" binding="rolA">
         <constraints>
           <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -37,7 +37,7 @@
           <text value="ROL:"/>
         </properties>
       </component>
-      <component id="d8462" class="javax.swing.JButton" binding="GESTIÓNDEUSUARIOSButton" default-binding="true">
+      <component id="d8462" class="javax.swing.JButton" binding="btnGestUsuarios">
         <constraints>
           <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -45,7 +45,7 @@
           <text value="GESTIÓN DE USUARIOS "/>
         </properties>
       </component>
-      <component id="ec575" class="javax.swing.JButton" binding="REPORTESButton" default-binding="true">
+      <component id="ec575" class="javax.swing.JButton" binding="btnReportes">
         <constraints>
           <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -53,7 +53,7 @@
           <text value="REPORTES"/>
         </properties>
       </component>
-      <component id="b6035" class="javax.swing.JButton" binding="CERRARSESIÓNButton" default-binding="true">
+      <component id="b6035" class="javax.swing.JButton" binding="btnCerrarSesión">
         <constraints>
           <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>

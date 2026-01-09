@@ -5,16 +5,18 @@ import java.sql.DriverManager;
 
 public class Conexion_Base {
 
+    private static final String URL =
+            "jdbc:postgresql://db.lvwcvgxiwnwxoopgogmi.supabase.co:5432/postgres?sslmode=require";
+
+    private static final String USER = "postgres";
+    private static final String PASS = "megustapoo123";
+
     public static Connection conectar() {
         try {
-            String url = "jdbc:postgresql://db.lvwcvgxiwnwxoopgogmi.supabase.co:5432/postgres";
-            String user = "postgres";
-            String password = "megustapoo123";
-
-            return DriverManager.getConnection(url, user, password);
-
+            Class.forName("org.postgresql.Driver"); // 👈 CARGA DRIVER
+            return DriverManager.getConnection(URL, USER, PASS);
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace(); // 👈 MUESTRA ERROR REAL
             return null;
         }
     }
