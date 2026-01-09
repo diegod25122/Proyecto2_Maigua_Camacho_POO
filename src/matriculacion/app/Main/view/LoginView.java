@@ -72,7 +72,7 @@ public class LoginView extends JFrame {
                         String rol = rs.getString("rol");
 
                         if (rol.equals("ADMIN")) {
-                            new MenuAnalistaView(nombre, rol).setVisible(true);
+                            new MenuAdminView(nombre, rol).setVisible(true);
                         }
                         else {
 

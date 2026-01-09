@@ -11,11 +11,12 @@ public class MenuAdminView extends JFrame{
     private JLabel nombreUserA;
     private JLabel rolA;
     private JLabel lblTitulo;
+    private JButton GESTIONDEUSUARIOS;
     private JButton GENERARLICENCIAButton;
     private JButton GESTIONDETRAMITESButton;
     private JButton REGISTRAREXAMENESButton;
     private JButton VERIFICARREQUISITOSButton;
-    private JButton REGISTRARSOLICITANTEButton;
+    private JButton btnRegistrarSolicitante;
 
     MenuAdminView(String nombre, String rol){
          initcomponents();
@@ -45,20 +46,22 @@ public class MenuAdminView extends JFrame{
         add(rolA);
 
         //===== BOTONES =======
+        JButton btnRegistrarSolicitante = new JButton("REGISTRAR SOLICITANTE");
         JButton btnGestUsuarios= new  JButton("Gestionar Usuarios");
         JButton btnReportes = new JButton("Reportes");
         JButton btnCerrarSesión= new JButton("Cerrar Sesión");
+
 
         int x = 60;
         int y = 120;
         int w = 280;
         int h = 35;
         int gap = 45;
-
+        btnRegistrarSolicitante.setBounds(x,y,w,h);
         btnGestUsuarios.setBounds(x,y,w,h);
         btnReportes.setBounds(x,y+gap,w,h);
         btnCerrarSesión.setBounds(x,y+gap*2,w,h);
-
+        add(btnRegistrarSolicitante);
         add(btnGestUsuarios);
         add(btnReportes);
         add(btnCerrarSesión);
