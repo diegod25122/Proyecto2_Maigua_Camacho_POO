@@ -5,117 +5,85 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MenuAdminView extends JFrame{
-    private JButton btnRegistrar;
-    private JButton btnVerificar;
-    private JButton btnRegistrarExamen;
-    private JButton btnGestTramites;
-    private JButton btnGenerarLice;
-    private JButton btnCerrarSesion;
-    private JLabel nombreUser;
-    private JLabel rolUser;
+    private JButton btnGestUsuarios;
+    private JButton btnReportes;
+    private JButton btnCerrarSesión;
+    private JLabel nombreUserA;
+    private JLabel rolA;
     private JLabel lblTitulo;
+    private JButton GENERARLICENCIAButton;
+    private JButton GESTIONDETRAMITESButton;
+    private JButton REGISTRAREXAMENESButton;
+    private JButton VERIFICARREQUISITOSButton;
+    private JButton REGISTRARSOLICITANTEButton;
 
-    public MenuAdminView(String nombre, String rol) {
-        initComponents();
-        nombreUser.setText(nombre);
-        rolUser.setText(rol);
+    MenuAdminView(String nombre, String rol){
+         initcomponents();
+         nombreUserA.setText(nombre);
+         rolA.setText(rol);
 
-        //Configuracion de la ventana
+         //Configuracion de la ventana
         setTitle("Menu Admin");
-        setSize(400, 500);
-        setVisible(true);
+        setSize(300,300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(null);
         setLocationRelativeTo(null);
+        setLayout(null);
+        setVisible(true);
 
         //Pantalla
-        //=========== ENCABEZADO ==========
-        JLabel lblTitulo = new JLabel("BIENVENIDO/A");
-        lblTitulo.setBounds(20, 20, 200, 25);
+        //=======ENCABEZADO ========
+        JLabel lblTitulo= new JLabel("BIENVENIDO/A");
+        lblTitulo.setBounds(20,20,200,25);
 
-        nombreUser = new JLabel("👤 " + nombre);
-        nombreUser.setBounds(20, 55, 300, 25);
-
-        rolUser = new JLabel("Rol: " + rol);
-        rolUser.setBounds(20, 80, 200, 25);
+        JLabel nombreUserA=new JLabel("👤:"+nombre);
+        nombreUserA.setBounds(20,55,300,25);
+        JLabel rolA=new JLabel("Rol:"+rol);
+        rolA.setBounds(20,80,200,25);
 
         add(lblTitulo);
-        add(nombreUser);
-        add(rolUser);
+        add(nombreUserA);
+        add(rolA);
 
-        //=======BOTONES
-        JButton btnRegistrar = new JButton("Registrar");
-        JButton btnVerificar = new JButton("Verificar");
-        JButton btnRegistrarExamen = new JButton("Registrar Exámenes");
-        JButton btnGestTramites = new JButton("Gestionar Tramites");
-        JButton btnGenerarLice = new JButton("Generar Licencica");
-        JButton btnCerrarSesion = new JButton("Cerrar Sesion");
+        //===== BOTONES =======
+        JButton btnGestUsuarios= new  JButton("Gestionar Usuarios");
+        JButton btnReportes = new JButton("Reportes");
+        JButton btnCerrarSesión= new JButton("Cerrar Sesión");
 
-        int x=60;
-        int y=120;
-        int w=280;
-        int h=35;
-        int gap=45;
+        int x = 60;
+        int y = 120;
+        int w = 280;
+        int h = 35;
+        int gap = 45;
 
-        //Ubicacio de los botones
-        btnRegistrar.setBounds(x, y, w, h);
-        btnVerificar.setBounds(x, y+gap, w, h);
-        btnRegistrarExamen.setBounds(x, y+gap*2, w, h);
-        btnGestTramites.setBounds(x, y+gap*3, w, h);
-        btnGenerarLice.setBounds(x, y+gap*4, w, h);
-        btnCerrarSesion.setBounds(x, y+gap*5, w, h);
+        btnGestUsuarios.setBounds(x,y,w,h);
+        btnReportes.setBounds(x,y+gap,w,h);
+        btnCerrarSesión.setBounds(x,y+gap*2,w,h);
 
-        add(btnRegistrar);
-        add(btnVerificar);
-        add(btnRegistrarExamen);
-        add(btnGestTramites);
-        add(btnGenerarLice);
-        add(btnCerrarSesion);
+        add(btnGestUsuarios);
+        add(btnReportes);
+        add(btnCerrarSesión);
 
-
-        btnRegistrar.addActionListener(new ActionListener() {
+        btnGestUsuarios.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
             }
         });
-        btnVerificar.addActionListener(new ActionListener() {
+        btnReportes.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
             }
         });
-        btnRegistrarExamen.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-        btnGestTramites.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-        btnGenerarLice.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-        btnCerrarSesion.addActionListener(new ActionListener() {
+        btnCerrarSesión.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
             }
         });
     }
-
-    private void initComponents() {
-
-        nombreUser = new JLabel();
-        rolUser = new JLabel();
+    public void initcomponents(){
+        nombreUserA=new JLabel();
+        rolA=new JLabel();
     }
-
 }
-

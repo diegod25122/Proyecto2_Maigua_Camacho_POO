@@ -13,7 +13,7 @@ public class Conexion_Base {
 
     public static Connection conectar() {
         try {
-            Class.forName("org.postgresql.Driver"); // 👈 CARGA DRIVER
+            Class.forName("org.postgresql.Driver");
             return DriverManager.getConnection(URL, USER, PASS);
         } catch (Exception e) {
             e.printStackTrace(); // 👈 MUESTRA ERROR REAL
