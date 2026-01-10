@@ -1,94 +1,88 @@
 package matriculacion.app.Main.view;
 
-import matriculacion.app.Main.Conexion.Conexion_Base;
+import matriculacion.app.Main.CRUD_DATOS.UsuarioDao;
+import matriculacion.app.Main.model.Usuario;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-//Librerias de conexión
-import java.sql.Connection;
-import java.sql.Statement;
-import java.sql.ResultSet;
-
 
 public class LoginView extends JFrame {
+
+    // componentes provenientes del form
+    private JPanel panelPrincipal;
+
     private JTextField txtUser;
-    private JButton btnIngreso;
     private JPasswordField passField;
-    private JLabel intentos;
+    private JButton btnIngreso;
+
+
+    // control de intentos
+    private int intentos = 3;
+
     public LoginView() {
-        //Estilos de la venta
+
+        // conectamos con el form
+        setContentPane(panelPrincipal);
         setTitle("Login");
-        setSize(300, 300);
+        setSize(440, 350);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(null);
 
-        //Componentes de la ventana
-        JLabel lblUser=new JLabel("Usuario:");
-        JLabel lblPass=new JLabel("Contraseña:");
 
-        //Objetos
-        txtUser=new JTextField();
-        passField=new JPasswordField();
-        btnIngreso=new JButton("Ingresar");
-        //Estilos de los objetos
-        lblUser.setBounds(20,20,80,25);
-        txtUser.setBounds(110,20,150,25);
 
-        lblPass.setBounds(20,60,80,25);
-        passField.setBounds(110,60,150,25);
+        // usamos enter para ingresar
+        getRootPane().setDefaultButton(btnIngreso);
 
-        btnIngreso.setBounds(90,110,100,30);
+        // login
+        btnIngreso.addActionListener(e -> {
 
-        //Añadir los botones al Panel
-        add(lblUser);
-        add(txtUser);
-        add(lblPass);
-        add(passField);
-        add(btnIngreso);
+            String user = txtUser.getText();
+            String pass = new String(passField.getPassword());
 
-        btnIngreso.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //Varibles
-                String user = txtUser.getText();
-                String pass = new  String(passField.getPassword());
-                //Procedimiento
-                try {
-                    //Conexion
-                    Connection conexion = Conexion_Base.conectar();
-                    String sqlR="select nombre, rol  from usuario " +
-                            "where username = '" + user + "' " +
-                            "AND password = '" + pass + "'" +
-                            "AND estado = 'ACTIVO'";
-                    Statement st = conexion.createStatement(); //Mensaje para la BD
-                    //Respuesta
-                    ResultSet rs = st.executeQuery(sqlR);
+            try {
+                UsuarioDao dao = new UsuarioDao();
+                Usuario u = dao.login(user, pass);
 
-                    //Validacion de credenciales
-                    if (rs.next()) {
-                        String nombre = rs.getString("nombre");
-                        String rol = rs.getString("rol");
+                if (u != null) {
 
-                        if (rol.equals("ADMIN")) {
-                            new MenuAdminView(nombre, rol).setVisible(true);
-                        }
-                        else {
-
-                        }
-                        dispose();
-
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
+                    if (u.getRol().equalsIgnoreCase("ADMIN")) {
+                        new MenuAdminView(u.getNombre(), u.getRol());
+                    } else if (u.getRol().equalsIgnoreCase("ANALISTA")) {
+                        new MenuAnalistaView(u.getNombre(), u.getRol());
                     }
-                    conexion.close();
 
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
+                    dispose();
+
+                } else {
+                    intentos--;
+
+                    JOptionPane.showMessageDialog(
+                            this,
+                            "Usuario o contraseña incorrectos\nIntentos Restantes: "+intentos,
+                            "Error de autenticación",
+                            JOptionPane.WARNING_MESSAGE
+                    );
+
+                    if (intentos == 0) {
+                        JOptionPane.showMessageDialog(
+                                this,
+                                "Ha superado el número máximo de intentos.\nLa aplicación se cerrará.",
+                                "Acceso bloqueado",
+                                JOptionPane.ERROR_MESSAGE
+                        );
+                        System.exit(0);
+                    }
                 }
+
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Error de conexión con la base de datos",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE
+                );
             }
         });
+
+        setVisible(true);
     }
 }
-

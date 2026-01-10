@@ -23,13 +23,14 @@ public class UsuarioDao {
         
         ResultSet rs = st.executeQuery(sql);
 
+        Usuario u = null;
         if (rs.next()) {
-            Usuario u = new Usuario();
+            u = new Usuario();
             u.setNombre(rs.getString("nombre"));
             u.setRol(rs.getString("rol"));
-            return u;
         }
 
-        return null;
+        conexion.close();
+        return u;
     }
 }
