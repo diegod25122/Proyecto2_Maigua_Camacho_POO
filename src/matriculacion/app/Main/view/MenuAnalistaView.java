@@ -1,5 +1,7 @@
 package matriculacion.app.Main.view;
 
+import matriculacion.app.Main.util.Sesion;
+
 import javax.swing.*;
 
 public class MenuAnalistaView extends JFrame {
@@ -30,8 +32,11 @@ public class MenuAnalistaView extends JFrame {
         rolUser.setText("Rol: " + rol);
 
         // Acciones
-        btnRegistrar.addActionListener(e ->
-                JOptionPane.showMessageDialog(this, "Registrar Solicitante"));
+        btnRegistrar.addActionListener(e -> {
+            int idUsuario = Sesion.getUsuario().getId();
+            new RegistroSolicitanteView(idUsuario);
+        });
+
 
         btnVerificar.addActionListener(e ->
                 JOptionPane.showMessageDialog(this, "Verificar Requisitos"));
@@ -54,7 +59,7 @@ public class MenuAnalistaView extends JFrame {
             );
 
             if (op == JOptionPane.YES_OPTION) {
-                dispose();
+                Sesion.cerrarSesion();
                 new LoginView();
             }
         });
