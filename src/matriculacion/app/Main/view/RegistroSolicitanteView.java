@@ -44,6 +44,8 @@ public class RegistroSolicitanteView extends JFrame {
         cmbTipoLicencia.addItem("A");
         cmbTipoLicencia.addItem("B");
         cmbTipoLicencia.addItem("C");
+        cmbTipoLicencia.addItem("D");
+        cmbTipoLicencia.addItem("E");
         cmbTipoLicencia.addItem("F");
 
         //boton guardar
