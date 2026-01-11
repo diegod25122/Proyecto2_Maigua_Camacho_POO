@@ -1,5 +1,13 @@
 package matriculacion.app.Main.view;
 
+//librerias para importar pdf
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
+
+import java.io.File;
+
 import matriculacion.app.Main.CRUD_DATOS.LicenciaDao;
 import matriculacion.app.Main.CRUD_DATOS.TramiteDao;
 import matriculacion.app.Main.model.Licencia;
@@ -167,23 +175,67 @@ public class GeneracionLicenciaView extends JFrame {
     }
 
     private void exportarPDF() {
-        if (txtNumeroLicencia.getText().isEmpty() ||
-                txtNumeroLicencia.getText().equals("Pendiente")) {
-            JOptionPane.showMessageDialog(this,
-                    "Primero debe generar la licencia",
-                    "Advertencia",
-                    JOptionPane.WARNING_MESSAGE);
-            return;
-        }
+        try {
 
-        // funcionalidad pendiente de implementar
-        JOptionPane.showMessageDialog(this,
-                "Funcionalidad de exportar PDF en desarrollo\n" +
-                        "Puede implementarse con librerías como:\n" +
-                        "- iText\n" +
-                        "- Apache PDFBox\n" +
-                        "- JasperReports",
-                "Exportar PDF",
-                JOptionPane.INFORMATION_MESSAGE);
+            Licencia licencia = licenciaDao.obtenerPorTramite(tramiteId);
+
+            // Selector de archivo
+            JFileChooser chooser = new JFileChooser();
+            chooser.setDialogTitle("Guardar licencia en PDF");
+            chooser.setSelectedFile(new File("Licencia_" + licencia.getNumeroLicencia() + ".pdf"));
+
+            int opcion = chooser.showSaveDialog(this);
+            if (opcion != JFileChooser.APPROVE_OPTION) return;
+
+            File archivo = chooser.getSelectedFile();
+
+            // Crear PDF
+            PDDocument document = new PDDocument();
+            PDPage page = new PDPage();
+            document.addPage(page);
+
+            PDPageContentStream content = new PDPageContentStream(document, page);
+
+            content.beginText();
+            content.setFont(PDType1Font.HELVETICA_BOLD, 16);
+            content.setLeading(20f);
+            content.newLineAtOffset(100, 700);
+
+            content.showText("LICENCIA DE CONDUCCIÓN");
+            content.newLine();
+            content.newLine();
+
+            content.setFont(PDType1Font.HELVETICA, 12);
+            content.showText("Número de Licencia: " + licencia.getNumeroLicencia());
+            content.newLine();
+            content.showText("Fecha de Emisión: " + licencia.getFechaEmision());
+            content.newLine();
+            content.showText("Fecha de Vencimiento: " + licencia.getFechaVencimiento());
+            content.newLine();
+            content.newLine();
+            content.showText("Estado: LICENCIA EMITIDA");
+
+            content.endText();
+            content.close();
+
+            document.save(archivo);
+            document.close();
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "PDF generado correctamente:\n" + archivo.getAbsolutePath(),
+                    "Éxito",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Error al generar PDF",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
+            e.printStackTrace();
+        }
     }
 }

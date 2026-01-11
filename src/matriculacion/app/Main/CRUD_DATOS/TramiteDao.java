@@ -83,10 +83,10 @@ public class TramiteDao {
             t.setId(rs.getInt("id"));
             t.setSolicitanteId(rs.getInt("solicitante_id"));
             t.setTipoLicencia(rs.getString("tipo_licencia"));
-            t.setFechaSolicitud(rs.getDate("fecha_solicitud").toLocalDate()); // ✅ nuevo
+            t.setFechaSolicitud(rs.getDate("fecha_solicitud").toLocalDate()); //  nuevo
             t.setEstado(rs.getString("estado"));
             t.setCreatedBy(rs.getInt("created_by"));
-            t.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime()); // ✅ nuevo
+            t.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime()); //  nuevo
         }
 
         rs.close();
