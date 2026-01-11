@@ -58,8 +58,7 @@ public class MenuAdminView extends JFrame {
                 new GestionUsuariosView()
         );
 
-        btnReportes.addActionListener(e ->
-                JOptionPane.showMessageDialog(this, "Reportes y Estadísticas"));
+        btnReportes.addActionListener(e -> new ReportesView());
 
         //cerrar sesion
         btnCerrarSesion.addActionListener(e -> {
