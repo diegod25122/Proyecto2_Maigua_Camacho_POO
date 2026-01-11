@@ -4,33 +4,39 @@ import matriculacion.app.Main.Conexion.Conexion_Base;
 import matriculacion.app.Main.model.Usuario;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
+
 
 public class UsuarioDao {
 
     public Usuario login(String user, String pass) throws Exception {
 
-        Connection conexion = Conexion_Base.conectar();
+        Connection cn = Conexion_Base.conectar();
 
-        String sql =
-                "SELECT nombre, rol FROM usuario " +
-                        "WHERE username = '" + user + "' " +
-                        "AND password = '" + pass + "' " +
-                        "AND estado = 'ACTIVO'";
+        String sql ="""
+                    SELECT id, nombre, rol
+                    FROM usuario
+                    WHERE username = ?
+                    AND password = ?
+                    AND estado = 'ACTIVO' """;
 
-        Statement st = conexion.createStatement();
+        PreparedStatement ps = cn.prepareStatement(sql);
+        ps.setString(1, user);
+        ps.setString(2, pass);
+
         
-        ResultSet rs = st.executeQuery(sql);
+        ResultSet rs = ps.executeQuery();
 
-        Usuario u = null;
         if (rs.next()) {
-            u = new Usuario();
+            Usuario u = new Usuario();
+            u.setId(rs.getInt("id"));
             u.setNombre(rs.getString("nombre"));
             u.setRol(rs.getString("rol"));
+            return u;
         }
 
-        conexion.close();
-        return u;
+        cn.close();
+        return null;
     }
 }

@@ -2,6 +2,7 @@ package matriculacion.app.Main.view;
 
 import matriculacion.app.Main.CRUD_DATOS.UsuarioDao;
 import matriculacion.app.Main.model.Usuario;
+import matriculacion.app.Main.util.Sesion;
 
 import javax.swing.*;
 
@@ -43,7 +44,7 @@ public class LoginView extends JFrame {
                 Usuario u = dao.login(user, pass);
 
                 if (u != null) {
-
+                    Sesion.setUsuario(u);
                     if (u.getRol().equalsIgnoreCase("ADMIN")) {
                         new MenuAdminView(u.getNombre(), u.getRol());
                     } else if (u.getRol().equalsIgnoreCase("ANALISTA")) {

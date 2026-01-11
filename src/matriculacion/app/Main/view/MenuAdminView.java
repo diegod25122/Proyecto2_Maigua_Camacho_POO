@@ -1,5 +1,7 @@
 package matriculacion.app.Main.view;
 
+import matriculacion.app.Main.util.Sesion;
+
 import javax.swing.*;
 
 public class MenuAdminView extends JFrame {
@@ -27,7 +29,7 @@ public class MenuAdminView extends JFrame {
         setTitle("Menu Administrador");
         setSize(400, 550);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
        // datos del user
         nombreUserA.setText("👤 " + nombre);
@@ -35,8 +37,10 @@ public class MenuAdminView extends JFrame {
 
         // accion de los botones
 
-        btnRegistrarSolicitante.addActionListener(e ->
-                JOptionPane.showMessageDialog(this, "Registrar Solicitante"));
+        btnRegistrarSolicitante.addActionListener(e -> {
+            int idUsuario = Sesion.getUsuario().getId();
+            new RegistroSolicitanteView(idUsuario);
+        });
 
         btnVerificar.addActionListener(e ->
                 JOptionPane.showMessageDialog(this, "Verificar Requisitos"));
@@ -66,7 +70,7 @@ public class MenuAdminView extends JFrame {
             );
 
             if (op == JOptionPane.YES_OPTION) {
-                dispose();
+                Sesion.cerrarSesion();
                 new LoginView();
             }
         });
