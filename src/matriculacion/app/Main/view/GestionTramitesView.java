@@ -1,6 +1,8 @@
 package matriculacion.app.Main.view;
 
+import matriculacion.app.Main.CRUD_DATOS.RequisitosDao;
 import matriculacion.app.Main.CRUD_DATOS.TramiteDao;
+import matriculacion.app.Main.model.Requisitos;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -31,22 +33,60 @@ public class GestionTramitesView extends JFrame {
 
         filtrarButton.addActionListener(e -> filtrar());
 
-        verDetalleButton.addActionListener(e -> verDetalle());
-
-        reqOKButton.addActionListener(e -> {
-            abrirRequisitos();
+        verDetalleButton.addActionListener(e -> {
+            int tramiteId = getTramiteSeleccionado();
+            if (tramiteId != -1) {
+                new DetalleTramiteView(tramiteId);
+            }
         });
 
+        reqOKButton.addActionListener(e -> {
+            try {
+                int tramiteId = getTramiteSeleccionado();
+                if (tramiteId == -1) return;
 
-        registrarExámentButton.addActionListener(e -> abrirExamenes());
+                RequisitosDao requisitosDao = new RequisitosDao();
+                Requisitos req = requisitosDao.obtenerPorTramite(tramiteId);
 
-        registrarLicenciaButton.addActionListener(e -> generarLicencia());
+                if (req != null && req.isCertificadoMedico() && req.isPagoRealizado() && req.isMultasCanceladas()) {
+                    TramiteDao tramiteDao = new TramiteDao();
+                    tramiteDao.actualizarEstado(tramiteId, "en_examenes");
+
+                    JOptionPane.showMessageDialog(this,
+                            "Requisitos verificados. El trámite ahora está en fase de exámenes.",
+                            "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    cargarTramites(null); // refrescar tabla
+                } else {
+                    JOptionPane.showMessageDialog(this,
+                            "No se puede avanzar. Requisitos incompletos.",
+                            "Advertencia", JOptionPane.WARNING_MESSAGE);
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(this,
+                        "Error al verificar requisitos.",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
+        registrarExámentButton.addActionListener(e -> {
+            int tramiteId = getTramiteSeleccionado();
+            if (tramiteId != -1) {
+                new RegistroExamenesView(tramiteId);
+            }
+        });
+
+        registrarLicenciaButton.addActionListener(e -> {
+            int tramiteId = getTramiteSeleccionado();
+            if (tramiteId != -1) {
+                new GeneracionLicenciaView(tramiteId);
+            }
+        });
 
         setVisible(true);
     }
 
-
-    // CARGAR COMBOS
+    // CARGAR COMBO DE ESTADOS
     private void cargarEstados() {
         cmbEstado.removeAllItems();
         cmbEstado.addItem("TODOS");
@@ -57,28 +97,16 @@ public class GestionTramitesView extends JFrame {
         cmbEstado.addItem("licencia_emitida");
     }
 
-
-    // FILTRAR
-
+    // FILTRAR TRÁMITES
     private void filtrar() {
         String estado = cmbEstado.getSelectedItem().toString();
         cargarTramites(estado.equals("TODOS") ? null : estado);
     }
 
-
-    // CARGAR TABLA
-
+    // CARGAR TABLA DE TRÁMITES
     private void cargarTramites(String estado) {
-
         DefaultTableModel model = new DefaultTableModel(
-                new String[]{
-                        "ID",
-                        "Cédula",
-                        "Nombre",
-                        "Tipo Licencia",
-                        "Estado",
-                        "Fecha"
-                }, 0
+                new String[]{"ID", "Cédula", "Nombre", "Tipo Licencia", "Estado", "Fecha"}, 0
         );
 
         try {
@@ -101,65 +129,20 @@ public class GestionTramitesView extends JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this,
                     "Error al cargar trámites",
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE);
+                    "Error", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
     }
 
-
-    // OBTENER TRAMIITE SELECCIONADO
-
+    // OBTENER ID DEL TRÁMITE SELECCIONADO
     private int getTramiteSeleccionado() {
         int fila = tblEstado.getSelectedRow();
         if (fila == -1) {
             JOptionPane.showMessageDialog(this,
                     "Seleccione un trámite",
-                    "Aviso",
-                    JOptionPane.WARNING_MESSAGE);
+                    "Aviso", JOptionPane.WARNING_MESSAGE);
             return -1;
         }
         return Integer.parseInt(tblEstado.getValueAt(fila, 0).toString());
-    }
-
-    // ACCIONES
-
-    private void verDetalle() {
-        int id = getTramiteSeleccionado();
-        if (id != -1) {
-            JOptionPane.showMessageDialog(this,
-                    "Detalle del trámite ID: " + id);
-        }
-    }
-
-    private void abrirRequisitos() {
-        int id = getTramiteSeleccionado();
-        if (id != -1) {
-            new RequisitosView(id);
-        }
-    }
-
-
-
-
-    // FALTA QUE VALIDES EL BOTON REGISTRAR EXAMEN Y LICENCIA
-    private void abrirExamenes() {
-        int id = getTramiteSeleccionado();
-        if (id != -1) {
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Abrir registro de exámenes para trámite ID: " + id
-            );
-        }
-    }
-
-    private void generarLicencia() {
-        int id = getTramiteSeleccionado();
-        if (id != -1) {
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Generar licencia para trámite ID: " + id
-            );
-        }
     }
 }

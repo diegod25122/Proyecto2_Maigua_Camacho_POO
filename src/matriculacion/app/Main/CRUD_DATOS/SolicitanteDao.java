@@ -48,5 +48,25 @@ public class SolicitanteDao {
         PreparedStatement ps = cn.prepareStatement(sql);
         return ps.executeQuery();
     }
+    public Solicitante obtenerPorId(int id) throws Exception {
+        Connection cn = Conexion_Base.conectar();
+        String sql = "SELECT * FROM solicitante WHERE id = ?";
+        PreparedStatement ps = cn.prepareStatement(sql);
+        ps.setInt(1, id);
+        ResultSet rs = ps.executeQuery();
+
+        Solicitante s = null;
+        if (rs.next()) {
+            s = new Solicitante();
+            s.setId(rs.getInt("id"));
+            s.setCedula(rs.getString("cedula"));
+            s.setNombre(rs.getString("nombre"));
+        }
+
+        rs.close();
+        ps.close();
+        cn.close();
+        return s;
+    }
 }
 

@@ -1,48 +1,101 @@
 package matriculacion.app.Main.view;
 
+import matriculacion.app.Main.CRUD_DATOS.*;
+import matriculacion.app.Main.model.*;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class DetalleTramiteView {
+public class DetalleTramiteView extends JFrame {
+
     private JPanel panelPrincipal;
-    private JCheckBox médicoCheckBox;
+    // Datos del solicitante / trámite
+    private JLabel cedulaLabel;
+    private JLabel nombreLabel;
+    private JLabel tipoLicenciaLabel;
+
+    // Requisitos
+    private JCheckBox medicoCheckBox;
     private JCheckBox pagoCheckBox;
     private JCheckBox multasCheckBox;
+
+    // Exámenes
+    private JLabel teoricoLabel;
+    private JLabel practicoLabel;
+
+    // Licencia
+    private JLabel licenciaLabel;
+
+    // Botones
     private JButton guardarRequisitosButton;
     private JButton guardarNotasButton;
     private JButton generarLicenciaButton;
 
-    // colores a la ventana
-    public DetalleTramiteView() {
-        // color de fondo
-        panelPrincipal.setBackground(new Color(240, 80, 34, 255));
-        // checkboxes
-        médicoCheckBox.setOpaque(false);
-        pagoCheckBox.setOpaque(false);
-        multasCheckBox.setOpaque(false);
+    private int tramiteId;
 
-        médicoCheckBox.setForeground(Color.white);
-        pagoCheckBox.setForeground(Color.white);
-        multasCheckBox.setForeground(Color.white);
+    public DetalleTramiteView(int tramiteId) {
+        this.tramiteId = tramiteId;
 
-        // botones
-        estilizarBoton(guardarRequisitosButton, new Color (5, 5, 5));
-        estilizarBoton(guardarNotasButton, new Color (5, 5, 5));
-        estilizarBoton(generarLicenciaButton, new Color (5, 5, 5));
+        setContentPane(panelPrincipal);
+        setTitle("Detalle del Trámite");
+        setSize(500, 400);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        cargarDatos();
+
+        // 🔒 Solo visualización
+        guardarRequisitosButton.setEnabled(false);
+        guardarNotasButton.setEnabled(false);
+        generarLicenciaButton.setEnabled(false);
+
+        setVisible(true);
     }
-    private void  estilizarBoton(JButton boton, Color color) {
-        boton.setBackground(color);
-        boton.setForeground(color.WHITE);
-        boton.setFocusPainted(false);
-        boton.setBorderPainted(false);
-        boton.setFont(new Font("Arial", Font.BOLD, 13));
-    }
-    public void mostrar(){
-        JFrame frame = new JFrame("Detalle del Trámite");
-        frame.setContentPane(panelPrincipal);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+
+    private void cargarDatos() {
+        try {
+            // 1. Datos del trámite
+            TramiteDao TramiteDao = new TramiteDao();
+            Tramite tramite = TramiteDao.obtenerPorId(tramiteId);
+            SolicitanteDao solicitanteDao = new SolicitanteDao();
+            Solicitante s = solicitanteDao.obtenerPorId(tramite.getSolicitanteId());
+            cedulaLabel.setText(s.getCedula());
+            nombreLabel.setText(s.getNombre());
+            tipoLicenciaLabel.setText(tramite.getTipoLicencia());
+
+            // 2. Requisitos
+            RequisitosDao reqDao = new RequisitosDao();
+            Requisitos req = reqDao.obtenerPorTramite(tramiteId);
+            if (req != null) {
+                medicoCheckBox.setSelected(req.isCertificadoMedico());
+                pagoCheckBox.setSelected(req.isPagoRealizado());
+                multasCheckBox.setSelected(req.isMultasCanceladas());
+            }
+
+            // 3. Exámenes
+            ExamenDao examenDao = new ExamenDao();
+            Examen examen = examenDao.obtenerPorTramite(tramiteId); // necesitas este método en tu DAO
+            if (examen != null) {
+                teoricoLabel.setText(String.valueOf(examen.getNotaTeorica()));
+                practicoLabel.setText(String.valueOf(examen.getNotaPractica()));
+            } else {
+                teoricoLabel.setText("00");
+                practicoLabel.setText("00");
+            }
+
+            // 4. Licencia
+            LicenciaDao licenciaDao = new LicenciaDao();
+            Licencia lic = licenciaDao.obtenerPorTramite(tramiteId);
+            licenciaLabel.setText(lic != null ? "GENERADA" : "NO GENERADA");
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Error al cargar detalle del trámite",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
+            e.printStackTrace();
+        }
     }
 }

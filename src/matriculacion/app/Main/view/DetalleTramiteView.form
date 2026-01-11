@@ -24,7 +24,7 @@
           <text value="Cédula: "/>
         </properties>
       </component>
-      <component id="2c8b9" class="javax.swing.JLabel">
+      <component id="2c8b9" class="javax.swing.JLabel" binding="cedulaLabel">
         <constraints>
           <grid row="1" column="1" row-span="1" col-span="7" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -40,7 +40,7 @@
           <text value="Nombre: "/>
         </properties>
       </component>
-      <component id="dddc0" class="javax.swing.JLabel">
+      <component id="dddc0" class="javax.swing.JLabel" binding="nombreLabel">
         <constraints>
           <grid row="2" column="1" row-span="1" col-span="7" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -56,9 +56,9 @@
           <text value="Tipo de licencia: "/>
         </properties>
       </component>
-      <component id="5075b" class="javax.swing.JLabel">
+      <component id="5075b" class="javax.swing.JLabel" binding="licenciaLabel">
         <constraints>
-          <grid row="3" column="1" row-span="1" col-span="7" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="B"/>
@@ -77,7 +77,7 @@
           <text value="Requisitos:"/>
         </properties>
       </component>
-      <component id="92d7a" class="javax.swing.JCheckBox" binding="médicoCheckBox" default-binding="true">
+      <component id="92d7a" class="javax.swing.JCheckBox" binding="medicoCheckBox">
         <constraints>
           <grid row="6" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -125,7 +125,7 @@
           <text value="Licencia: "/>
         </properties>
       </component>
-      <component id="c76fd" class="javax.swing.JLabel">
+      <component id="c76fd" class="javax.swing.JLabel" binding="tipoLicenciaLabel">
         <constraints>
           <grid row="9" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -157,7 +157,7 @@
           <text value="Generar Licencia"/>
         </properties>
       </component>
-      <component id="f1a03" class="javax.swing.JLabel">
+      <component id="f1a03" class="javax.swing.JLabel" binding="teoricoLabel">
         <constraints>
           <grid row="8" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -165,7 +165,7 @@
           <text value="00"/>
         </properties>
       </component>
-      <component id="5fa65" class="javax.swing.JLabel">
+      <component id="5fa65" class="javax.swing.JLabel" binding="practicoLabel">
         <constraints>
           <grid row="8" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
