@@ -14,7 +14,6 @@ public class MenuAdminView extends JFrame {
     private JLabel rolA;
 
     private JButton btnRegistrarSolicitante;
-    private JButton btnVerificar;
     private JButton btnRegistrarExamenes;
     private JButton btnGestionTramites;
     private JButton btnGenerarLicencia;
@@ -42,14 +41,13 @@ public class MenuAdminView extends JFrame {
             new RegistroSolicitanteView(idUsuario);
         });
 
-        btnVerificar.addActionListener(e ->
-                JOptionPane.showMessageDialog(this, "Verificar Requisitos"));
 
         btnRegistrarExamenes.addActionListener(e ->
                 JOptionPane.showMessageDialog(this, "Registrar Exámenes"));
 
         btnGestionTramites.addActionListener(e ->
-                JOptionPane.showMessageDialog(this, "Gestión de Trámites"));
+                new GestionTramitesView()
+        );
 
         btnGenerarLicencia.addActionListener(e ->
                 JOptionPane.showMessageDialog(this, "Generar Licencia"));

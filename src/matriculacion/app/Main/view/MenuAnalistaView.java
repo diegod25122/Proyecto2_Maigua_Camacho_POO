@@ -12,7 +12,6 @@ public class MenuAnalistaView extends JFrame {
     private JLabel rolUser;
 
     private JButton btnRegistrar;
-    private JButton btnVerificar;
     private JButton btnRegistrarExamen;
     private JButton btnGestTramites;
     private JButton btnGenerarLice;
@@ -38,14 +37,15 @@ public class MenuAnalistaView extends JFrame {
         });
 
 
-        btnVerificar.addActionListener(e ->
-                JOptionPane.showMessageDialog(this, "Verificar Requisitos"));
+
 
         btnRegistrarExamen.addActionListener(e ->
                 JOptionPane.showMessageDialog(this, "Registrar Exámenes"));
 
         btnGestTramites.addActionListener(e ->
-                JOptionPane.showMessageDialog(this, "Gestión de Trámites"));
+                new GestionTramitesView()
+        );
+
 
         btnGenerarLice.addActionListener(e ->
                 JOptionPane.showMessageDialog(this, "Generar Licencia"));
