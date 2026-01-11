@@ -25,7 +25,7 @@ public class MenuAnalistaView extends JFrame {
         setTitle("Menu Analista");
         setSize(400, 500);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         // usamos lo del form
         nombreUser.setText("👤 " + nombre);
@@ -60,6 +60,7 @@ public class MenuAnalistaView extends JFrame {
 
             if (op == JOptionPane.YES_OPTION) {
                 Sesion.cerrarSesion();
+                dispose();
                 new LoginView();
             }
         });

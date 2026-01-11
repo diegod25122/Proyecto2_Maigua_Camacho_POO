@@ -75,6 +75,7 @@ public class LoginView extends JFrame {
                 }
 
             } catch (Exception ex) {
+                ex.printStackTrace();
                 JOptionPane.showMessageDialog(
                         this,
                         "Error de conexión con la base de datos",

@@ -55,7 +55,8 @@ public class MenuAdminView extends JFrame {
                 JOptionPane.showMessageDialog(this, "Generar Licencia"));
 
         btnGestUsuarios.addActionListener(e ->
-                JOptionPane.showMessageDialog(this, "Gestión de Usuarios"));
+                new GestionUsuariosView()
+        );
 
         btnReportes.addActionListener(e ->
                 JOptionPane.showMessageDialog(this, "Reportes y Estadísticas"));
@@ -71,6 +72,7 @@ public class MenuAdminView extends JFrame {
 
             if (op == JOptionPane.YES_OPTION) {
                 Sesion.cerrarSesion();
+                dispose();
                 new LoginView();
             }
         });
