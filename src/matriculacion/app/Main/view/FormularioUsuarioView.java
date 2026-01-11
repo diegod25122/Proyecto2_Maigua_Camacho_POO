@@ -20,19 +20,19 @@ public class FormularioUsuarioView extends JFrame {
     // si es null -> crear | si tiene valor -> editar
     private Integer idUsuario = null;
 
-    // ================= CREAR =================
+    // crear
     public FormularioUsuarioView() {
         inicializar();
     }
 
-    // ================= EDITAR =================
+    // editar
     public FormularioUsuarioView(int idUsuario) {
         this.idUsuario = idUsuario;
         inicializar();
         cargarUsuario();
     }
 
-    // ================= MÉTODO COMÚN =================
+    // metodo comun
     private void inicializar() {
         setContentPane(panelPrincipal);
         setTitle("Formulario de Usuario");
@@ -48,7 +48,7 @@ public class FormularioUsuarioView extends JFrame {
         setVisible(true);
     }
 
-    // ================= COMBOS =================
+    // combos
     private void cargarCombos() {
         cmbRol.removeAllItems();
         cmbRol.addItem("ADMIN");
@@ -59,7 +59,7 @@ public class FormularioUsuarioView extends JFrame {
         cmbEstado.addItem("INACTIVO");
     }
 
-    // ================= CARGAR USUARIO =================
+    // cargar users
     private void cargarUsuario() {
         try {
             UsuarioDao dao = new UsuarioDao();
@@ -81,7 +81,7 @@ public class FormularioUsuarioView extends JFrame {
         }
     }
 
-    // ================= GUARDAR =================
+    // guardar usuarios
     private void guardar() {
 
         String cedula = txtCedula.getText().trim();
