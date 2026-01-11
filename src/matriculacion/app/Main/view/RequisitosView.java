@@ -51,7 +51,7 @@ public class RequisitosView extends JFrame {
             return;
         }
 
-        // ✅ SOLO SI PASA LA VALIDACIÓN
+        //  SOLO SI PASA LA VALIDACIÓN
         setContentPane(panelPrincipal);
         setTitle("Verificación de Requisitos");
         setSize(450, 400);

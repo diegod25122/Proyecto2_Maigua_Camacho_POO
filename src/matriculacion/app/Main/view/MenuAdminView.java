@@ -14,9 +14,8 @@ public class MenuAdminView extends JFrame {
     private JLabel rolA;
 
     private JButton btnRegistrarSolicitante;
-    private JButton btnRegistrarExamenes;
+
     private JButton btnGestionTramites;
-    private JButton btnGenerarLicencia;
     private JButton btnGestUsuarios;
     private JButton btnReportes;
     private JButton btnCerrarSesion;
@@ -54,16 +53,10 @@ public class MenuAdminView extends JFrame {
             }
         });
 
-        btnRegistrarExamenes.addActionListener(e -> {
-            new RegistroExamenesView();
-        });
-
         btnGestionTramites.addActionListener(e ->
                 new GestionTramitesView()
         );
 
-        btnGenerarLicencia.addActionListener(e ->
-              new GeneracionLicenciaView(tramiteId));
 
         btnGestUsuarios.addActionListener(e ->
                 new GestionUsuariosView()

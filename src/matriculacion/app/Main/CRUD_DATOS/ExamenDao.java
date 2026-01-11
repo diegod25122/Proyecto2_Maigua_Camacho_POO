@@ -76,5 +76,29 @@ public class ExamenDao {
         conn.close();
         return ex;
     }
+    public boolean actualizar(Examen examen) {
+        try {
+            Connection conn = Conexion_Base.conectar();
+            String sql = """
+            UPDATE examen
+            SET nota_teorica = ?, nota_practica = ?, resultado = ?
+            WHERE tramite_id = ?
+        """;
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setDouble(1, examen.getNotaTeorica());
+            ps.setDouble(2, examen.getNotaPractica());
+            ps.setString(3, examen.getResultado());
+            ps.setInt(4, examen.getTramiteId());
+
+            int filas = ps.executeUpdate();
+            ps.close();
+            conn.close();
+            return filas > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 
 }

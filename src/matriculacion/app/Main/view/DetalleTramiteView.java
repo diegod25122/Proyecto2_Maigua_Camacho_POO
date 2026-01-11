@@ -26,10 +26,6 @@ public class DetalleTramiteView extends JFrame {
     // Licencia
     private JLabel licenciaLabel;
 
-    // Botones
-    private JButton guardarRequisitosButton;
-    private JButton guardarNotasButton;
-    private JButton generarLicenciaButton;
 
     private int tramiteId;
 
@@ -44,10 +40,6 @@ public class DetalleTramiteView extends JFrame {
 
         cargarDatos();
 
-        // 🔒 Solo visualización
-        guardarRequisitosButton.setEnabled(false);
-        guardarNotasButton.setEnabled(false);
-        generarLicenciaButton.setEnabled(false);
 
         setVisible(true);
     }

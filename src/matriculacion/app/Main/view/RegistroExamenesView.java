@@ -1,5 +1,6 @@
 package matriculacion.app.Main.view;
 
+import matriculacion.app.Main.CRUD_DATOS.TramiteDao;
 import matriculacion.app.Main.CRUD_DATOS.ExamenDao;
 import matriculacion.app.Main.model.Examen;
 import javax.swing.*;
@@ -52,65 +53,85 @@ public class RegistroExamenesView extends JFrame {
 
     private void guardarExamen() {
         try {
-            // validar que no esten vacios
             if (txtNota.getText().isEmpty() || txtPractica.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Complete todos los campos");
                 return;
             }
 
-            // obtener las notas
             double notaTeorica = Double.parseDouble(txtNota.getText());
             double notaPractica = Double.parseDouble(txtPractica.getText());
 
-            // validar que esten entre 0 y 20
-            if (notaTeorica < 0 || notaTeorica > 20 || notaPractica < 0 || notaPractica > 20) {
+            if (notaTeorica < 0 || notaTeorica > 20 ||
+                    notaPractica < 0 || notaPractica > 20) {
                 JOptionPane.showMessageDialog(this, "Las notas deben estar entre 0 y 20");
                 return;
             }
 
-            // Si NO se paso tramiteId, pedirlo al usuario
             if (tramiteId == 0) {
                 String input = JOptionPane.showInputDialog(this, "Ingrese el ID del trámite:");
-                if (input == null || input.isEmpty()) {
-                    return;
-                }
+                if (input == null || input.isEmpty()) return;
                 tramiteId = Integer.parseInt(input);
             }
 
-            // Si NO hay conexion, mostrar mensaje
-            if (examenDAO == null) {
-                JOptionPane.showMessageDialog(this, "Error: No se pudo conectar a la base de datos");
+            TramiteDao tramiteDao = new TramiteDao();
+            ExamenDao examenDAO = new ExamenDao();
+
+            String estado = tramiteDao.obtenerEstado(tramiteId);
+
+            // No permitir si ya está aprobado o con licencia
+            if (estado.equalsIgnoreCase("aprobado") ||
+                    estado.equalsIgnoreCase("licencia_emitida")) {
+
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Este trámite ya fue aprobado.\nNo se puede volver a rendir examen.",
+                        "Acción no permitida",
+                        JOptionPane.WARNING_MESSAGE
+                );
                 return;
             }
 
-            // verificar si ya existe un examen
-            if (examenDAO.existeExamen(tramiteId)) {
-                JOptionPane.showMessageDialog(this, "Ya existe un examen para este tramite");
-                return;
-            }
-
-            // verificar si ya existe un examen
-            if (examenDAO.existeExamen(tramiteId)) {
-                JOptionPane.showMessageDialog(this, "Ya existe un examen para este tramite");
-                return;
-            }
-
-            // crear el examen
             Examen examen = new Examen(tramiteId, notaTeorica, notaPractica);
 
-            // guardar
-            if (examenDAO.guardar(examen)) {
-                txtResultado.setText("Resultado: " + examen.getResultado());
-                JOptionPane.showMessageDialog(this, "Examen guardado correctamente");
-                limpiar();
+            boolean existe = examenDAO.existeExamen(tramiteId);
+            boolean ok;
+
+            if (existe) {
+                ok = examenDAO.actualizar(examen); //  reintento
             } else {
-                JOptionPane.showMessageDialog(this, "Error al guardar");
+                ok = examenDAO.guardar(examen);    // primer intento
+            }
+
+            if (ok) {
+                tramiteDao.actualizarEstado(
+                        tramiteId,
+                        examen.getResultado().equals("APROBADO")
+                                ? "aprobado"
+                                : "reprobado"
+                );
+
+                JOptionPane.showMessageDialog(
+                        this,
+                        existe
+                                ? "Examen actualizado correctamente"
+                                : "Examen registrado correctamente",
+                        "Éxito",
+                        JOptionPane.INFORMATION_MESSAGE
+                );
+
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al guardar el examen");
             }
 
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Ingrese solo numeros validos");
+            JOptionPane.showMessageDialog(this, "Ingrese solo números válidos");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error del sistema");
+            e.printStackTrace();
         }
     }
+
 
     private void limpiar() {
         txtNota.setText("");

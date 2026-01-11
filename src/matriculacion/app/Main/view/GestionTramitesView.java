@@ -3,6 +3,8 @@ package matriculacion.app.Main.view;
 import matriculacion.app.Main.CRUD_DATOS.RequisitosDao;
 import matriculacion.app.Main.CRUD_DATOS.TramiteDao;
 import matriculacion.app.Main.model.Requisitos;
+import matriculacion.app.Main.CRUD_DATOS.ExamenDao;
+
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -16,7 +18,6 @@ public class GestionTramitesView extends JFrame {
     private JTable tblEstado;
     private JButton filtrarButton;
     private JButton verDetalleButton;
-    private JButton reqOKButton;
     private JButton registrarExámentButton;
     private JButton registrarLicenciaButton;
 
@@ -40,41 +41,43 @@ public class GestionTramitesView extends JFrame {
             }
         });
 
-        reqOKButton.addActionListener(e -> {
+
+        registrarExámentButton.addActionListener(e -> {
             try {
                 int tramiteId = getTramiteSeleccionado();
                 if (tramiteId == -1) return;
 
-                RequisitosDao requisitosDao = new RequisitosDao();
-                Requisitos req = requisitosDao.obtenerPorTramite(tramiteId);
+                TramiteDao dao = new TramiteDao();
+                String estado = dao.obtenerEstado(tramiteId);
 
-                if (req != null && req.isCertificadoMedico() && req.isPagoRealizado() && req.isMultasCanceladas()) {
-                    TramiteDao tramiteDao = new TramiteDao();
-                    tramiteDao.actualizarEstado(tramiteId, "en_examenes");
+                if (!estado.equalsIgnoreCase("en_examenes") &&
+                        !estado.equalsIgnoreCase("reprobado")) {
 
-                    JOptionPane.showMessageDialog(this,
-                            "Requisitos verificados. El trámite ahora está en fase de exámenes.",
-                            "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                    cargarTramites(null); // refrescar tabla
-                } else {
-                    JOptionPane.showMessageDialog(this,
-                            "No se puede avanzar. Requisitos incompletos.",
-                            "Advertencia", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(
+                            this,
+                            "Solo se puede registrar examen cuando el trámite\n" +
+                                    "está EN EXÁMENES o REPROBADO.\nEstado actual: " + estado,
+                            "Acción no permitida",
+                            JOptionPane.WARNING_MESSAGE
+                    );
+                    return;
                 }
+
+                RegistroExamenesView view = new RegistroExamenesView(tramiteId);
+                view.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosed(java.awt.event.WindowEvent e) {
+                        cargarTramites(null);
+                    }
+                });
+
             } catch (Exception ex) {
                 ex.printStackTrace();
-                JOptionPane.showMessageDialog(this,
-                        "Error al verificar requisitos.",
-                        "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Error al validar trámite");
             }
         });
 
-        registrarExámentButton.addActionListener(e -> {
-            int tramiteId = getTramiteSeleccionado();
-            if (tramiteId != -1) {
-                new RegistroExamenesView(tramiteId);
-            }
-        });
+
 
         registrarLicenciaButton.addActionListener(e -> {
             int tramiteId = getTramiteSeleccionado();
