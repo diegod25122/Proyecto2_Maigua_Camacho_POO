@@ -6,8 +6,9 @@ public class RequisitosView {
     private JCheckBox certificadoMédicoCheckBox;
     private JCheckBox pagoRealizadoCheckBox;
     private JCheckBox multasCanceladasCheckBox;
-    private JTextArea textArea1;
+    private JTextArea txtObservaciones;
     private JButton aprobarButton;
     private JButton rechazarButton;
     private JButton regresarButton;
+    private JPanel panelPrincipal;
 }
