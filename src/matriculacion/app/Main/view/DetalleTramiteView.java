@@ -37,7 +37,6 @@ public class DetalleTramiteView extends JFrame {
         setSize(500, 400);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        estilizarTitulo();
         estilizarSecciones();
         estilizarCheckboxes();
         cargarDatos();
@@ -91,15 +90,6 @@ public class DetalleTramiteView extends JFrame {
             );
             e.printStackTrace();
         }
-    }
-    //Metodo para estetizar el titulo
-    private void estilizarTitulo() {
-        JLabel titulo = new JLabel("DETALLE DEL TRÁMITE");
-        titulo.setFont(new Font("Segoe UI", Font.BOLD, 20));
-        titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
-        titulo.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
-
-        panelPrincipal.add(titulo, 0);
     }
     private void estilizarSecciones() {
 
