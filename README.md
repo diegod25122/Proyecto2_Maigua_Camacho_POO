@@ -27,3 +27,11 @@ El sistema automatiza el proceso de matriculación vehicular y emisión de licen
 ├── view            Formularios y ventanas en Swing
 ├── docs          Manuales de usuario y técnico
 └── build         Artefactos (.jar/.exe)
+
+USUARIO ADMIN:
+Usuario: admin1
+Contraseña: 25122004
+
+USUARIO ANALISTA
+Usuario:jairo
+Contraseña: $jairo1234
