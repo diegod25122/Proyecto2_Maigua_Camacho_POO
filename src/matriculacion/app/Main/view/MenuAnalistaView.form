@@ -62,14 +62,14 @@
               <text value="GESTIÓN DE TRÁMITES"/>
             </properties>
           </component>
-          <component id="24422" class="javax.swing.JButton" binding="btnGestionUsuarios">
+          <component id="24422" class="javax.swing.JButton" binding="btnVerificarRequisitos">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="1" use-parent-layout="false">
                 <maximum-size width="240" height="40"/>
               </grid>
             </constraints>
             <properties>
-              <text value="GESTIÓN DE USUARIOS"/>
+              <text value="VERIFICAR REQUISITOS"/>
             </properties>
           </component>
         </children>
