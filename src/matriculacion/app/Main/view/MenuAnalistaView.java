@@ -1,8 +1,10 @@
 package matriculacion.app.Main.view;
 
+import matriculacion.app.Main.util.ImageUtil;
 import matriculacion.app.Main.util.Sesion;
-
+import  matriculacion.app.Main.*;
 import javax.swing.*;
+import java.awt.*;
 
 public class MenuAnalistaView extends JFrame {
 
@@ -11,11 +13,25 @@ public class MenuAnalistaView extends JFrame {
     private JLabel nombreUser;
     private JLabel rolUser;
 
-    private JButton btnRegistrar;
-    private JButton btnGestTramites;
+    private JButton btnRegistrarSolicitante;
+    private JButton btnGestionTramites;
 
     private JButton btnCerrarSesion;
+    private JButton btnGestionUsuarios;
+    private JLabel lblImagen;
 
+    @Override
+    public void addNotify() {
+        super.addNotify();
+
+        ImageUtil.setImage(
+                lblImagen,
+
+                "/matriculacion/app/Main/util/Imagenes/analista.png",
+                120,
+                120
+        );
+    }
     public MenuAnalistaView(String nombre, String rol) {
 
         // conectamos el form con la pantalla principal
@@ -24,26 +40,29 @@ public class MenuAnalistaView extends JFrame {
         setSize(400, 500);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        //Estetica de botones e interfaz del admin
 
+        estilizarBoton(btnRegistrarSolicitante);
+        estilizarBoton(btnGestionUsuarios);
+        estilizarBoton(btnGestionTramites);
+        estilizarBoton(btnCerrarSesion);
         // usamos lo del form
         nombreUser.setText("👤 " + nombre);
         rolUser.setText("Rol: " + rol);
 
         // Acciones
-        btnRegistrar.addActionListener(e -> {
+        btnRegistrarSolicitante.addActionListener(e -> {
             int idUsuario = Sesion.getUsuario().getId();
             new RegistroSolicitanteView(idUsuario);
         });
 
-
-
-
-        btnGestTramites.addActionListener(e ->
+        btnGestionTramites.addActionListener(e ->
                 new GestionTramitesView()
         );
 
-
-
+        btnGestionUsuarios.addActionListener(e ->
+                new GestionUsuariosView()
+        );
         btnCerrarSesion.addActionListener(e -> {
             int op = JOptionPane.showConfirmDialog(
                     this,
@@ -61,4 +80,13 @@ public class MenuAnalistaView extends JFrame {
 
         setVisible(true);
     }
+    //Metodo para la estetica de los botones
+    private void estilizarBoton(JButton boton) {
+        boton.setBackground(new Color(25, 25, 25));
+        boton.setForeground(Color.WHITE);
+        boton.setFont(new Font("Segoe UI", Font.BOLD, 13));
+        boton.setFocusPainted(false);
+        boton.setBorder(BorderFactory.createEmptyBorder(12, 20, 12, 20));
+    }
+
 }

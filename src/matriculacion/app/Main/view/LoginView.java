@@ -2,9 +2,11 @@ package matriculacion.app.Main.view;
 
 import matriculacion.app.Main.CRUD_DATOS.UsuarioDao;
 import matriculacion.app.Main.model.Usuario;
+import matriculacion.app.Main.util.ImageUtil;
 import matriculacion.app.Main.util.Sesion;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class LoginView extends JFrame {
 
@@ -14,20 +16,35 @@ public class LoginView extends JFrame {
     private JTextField txtUser;
     private JPasswordField passField;
     private JButton btnIngreso;
+    private JLabel lblTitulo;
+    private JLabel lblUsuario;
+    private JLabel lblPassword;
+    private JLabel lblImagen;
 
 
     // control de intentos
     private int intentos = 3;
+    @Override
+    public void addNotify() {
+        super.addNotify();
 
+        ImageUtil.setImage(
+                lblImagen,
+
+                "/matriculacion/app/Main/util/Imagenes/icono.png",
+                80,
+                80
+        );
+    }
     public LoginView() {
-
+       //Decoracion del Login
+        esticaLogin();
         // conectamos con el form
         setContentPane(panelPrincipal);
         setTitle("Login");
-        setSize(440, 350);
+        setSize(500, 300);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 
 
         // usamos enter para ingresar
@@ -87,4 +104,42 @@ public class LoginView extends JFrame {
 
         setVisible(true);
     }
+    private void esticaLogin() {
+
+        // Fuente base
+        Font fontTexto = new Font("Segoe UI", Font.PLAIN, 14);
+        Font fontTitulo = new Font("Segoe UI", Font.BOLD, 16);
+        Font fontBoton  = new Font("Segoe UI", Font.BOLD, 14);
+
+        // ===== TÍTULO =====
+        lblTitulo.setFont(fontTitulo);
+        lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
+
+        // ===== LABELS =====
+        lblUsuario.setFont(fontTexto);
+        lblPassword.setFont(fontTexto);
+
+        // ===== CAMPOS DE TEXTO =====
+        estilizarCampo(txtUser, fontTexto);
+        estilizarCampo(passField, fontTexto);
+
+        // ===== BOTÓN =====
+        btnIngreso.setFont(fontBoton);
+        btnIngreso.setBackground(Color.BLACK);
+        btnIngreso.setForeground(Color.WHITE);
+        btnIngreso.setFocusPainted(false);
+        btnIngreso.setBorder(BorderFactory.createEmptyBorder(12, 30, 12, 30));
+        btnIngreso.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }
+    //Metodo para estilizar los campos de ingreso
+    private void estilizarCampo(JTextField campo, Font fuente) {
+        campo.setFont(fuente);
+        campo.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(Color.LIGHT_GRAY),
+                BorderFactory.createEmptyBorder(8, 10, 8, 10)
+        ));
+    }
+
+
 }
+

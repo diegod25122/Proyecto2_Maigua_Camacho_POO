@@ -37,7 +37,9 @@ public class DetalleTramiteView extends JFrame {
         setSize(500, 400);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
+        estilizarTitulo();
+        estilizarSecciones();
+        estilizarCheckboxes();
         cargarDatos();
 
 
@@ -90,4 +92,39 @@ public class DetalleTramiteView extends JFrame {
             e.printStackTrace();
         }
     }
+    //Metodo para estetizar el titulo
+    private void estilizarTitulo() {
+        JLabel titulo = new JLabel("DETALLE DEL TRÁMITE");
+        titulo.setFont(new Font("Segoe UI", Font.BOLD, 20));
+        titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
+        titulo.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
+
+        panelPrincipal.add(titulo, 0);
+    }
+    private void estilizarSecciones() {
+
+        Font tituloSeccion = new Font("Segoe UI", Font.BOLD, 14);
+        Font texto = new Font("Segoe UI", Font.PLAIN, 13);
+
+        cedulaLabel.setFont(texto);
+        nombreLabel.setFont(texto);
+        tipoLicenciaLabel.setFont(texto);
+
+        teoricoLabel.setFont(texto);
+        practicoLabel.setFont(texto);
+        licenciaLabel.setFont(texto);
+    }
+    private void estilizarCheckboxes() {
+        JCheckBox[] checks = {
+                medicoCheckBox,
+                pagoCheckBox,
+                multasCheckBox
+        };
+
+        for (JCheckBox c : checks) {
+            c.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+            c.setOpaque(false);
+        }
+    }
+
 }
