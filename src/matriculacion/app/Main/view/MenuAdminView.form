@@ -27,52 +27,12 @@
           <text value="👤 Nombre de usuario"/>
         </properties>
       </component>
-      <component id="d8462" class="javax.swing.JButton" binding="btnGestUsuarios">
-        <constraints>
-          <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="GESTION DE USUARIOS"/>
-        </properties>
-      </component>
-      <component id="ec575" class="javax.swing.JButton" binding="btnReportes">
-        <constraints>
-          <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="REPORTES Y ESTADISTICAS"/>
-        </properties>
-      </component>
-      <component id="b6035" class="javax.swing.JButton" binding="btnCerrarSesion">
-        <constraints>
-          <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="CERRAR SESIÓN"/>
-        </properties>
-      </component>
-      <component id="70f27" class="javax.swing.JButton" binding="btnGestionTramites">
-        <constraints>
-          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="GESTION DE TRAMITES"/>
-        </properties>
-      </component>
       <component id="267ec" class="javax.swing.JButton" binding="btnRegistrarSolicitante">
         <constraints>
           <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="REGISTRAR SOLICITANTE"/>
-        </properties>
-      </component>
-      <component id="8ea73" class="javax.swing.JButton" binding="btnVerificarRequisitos">
-        <constraints>
-          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="VERIFICAR REQUISITOS"/>
         </properties>
       </component>
       <component id="1e798" class="javax.swing.JLabel" binding="rolA">
@@ -102,7 +62,7 @@
       <grid id="29acd" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
-          <grid row="3" column="1" row-span="5" col-span="6" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="3" column="1" row-span="6" col-span="6" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <background color="-657931"/>
@@ -119,6 +79,38 @@
           </component>
         </children>
       </grid>
+      <component id="70f27" class="javax.swing.JButton" binding="btnGestionTramites">
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="GESTION DE TRAMITES"/>
+        </properties>
+      </component>
+      <component id="d8462" class="javax.swing.JButton" binding="btnGestUsuarios">
+        <constraints>
+          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="GESTION DE USUARIOS"/>
+        </properties>
+      </component>
+      <component id="ec575" class="javax.swing.JButton" binding="btnReportes">
+        <constraints>
+          <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="REPORTES Y ESTADISTICAS"/>
+        </properties>
+      </component>
+      <component id="b6035" class="javax.swing.JButton" binding="btnCerrarSesion">
+        <constraints>
+          <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="CERRAR SESIÓN"/>
+        </properties>
+      </component>
     </children>
   </grid>
 </form>

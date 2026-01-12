@@ -17,7 +17,6 @@ public class MenuAnalistaView extends JFrame {
     private JButton btnGestionTramites;
 
     private JButton btnCerrarSesion;
-    private JButton btnVerificarRequisitos;
     private JLabel lblImagen;
 
     @Override
@@ -43,7 +42,6 @@ public class MenuAnalistaView extends JFrame {
         //Estetica de botones e interfaz del admin
 
         estilizarBoton(btnRegistrarSolicitante);
-        estilizarBoton(btnVerificarRequisitos);
         estilizarBoton(btnGestionTramites);
         estilizarBoton(btnCerrarSesion);
         // usamos lo del form
@@ -60,17 +58,7 @@ public class MenuAnalistaView extends JFrame {
                 new GestionTramitesView()
         );
 
-        btnVerificarRequisitos.addActionListener(e -> {
-            String input = JOptionPane.showInputDialog(this, "Ingrese ID del trámite a verificar:");
-            if (input != null && !input.isEmpty()) {
-                try {
-                    int tramiteId = Integer.parseInt(input);
-                    new RequisitosView(tramiteId);
-                } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(this, "ID inválido, debe ser un número.", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        });
+
         btnCerrarSesion.addActionListener(e -> {
             int op = JOptionPane.showConfirmDialog(
                     this,

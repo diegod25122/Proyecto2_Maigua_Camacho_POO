@@ -1,9 +1,6 @@
 package matriculacion.app.Main.view;
 
-import matriculacion.app.Main.CRUD_DATOS.RequisitosDao;
 import matriculacion.app.Main.CRUD_DATOS.TramiteDao;
-import matriculacion.app.Main.model.Requisitos;
-import matriculacion.app.Main.CRUD_DATOS.ExamenDao;
 
 
 import javax.swing.*;
@@ -20,6 +17,7 @@ public class GestionTramitesView extends JFrame {
     private JButton verDetalleButton;
     private JButton registrarExámentButton;
     private JButton registrarLicenciaButton;
+    private JButton verificarRequisitosButton;
 
     public GestionTramitesView() {
 
@@ -40,7 +38,32 @@ public class GestionTramitesView extends JFrame {
                 new DetalleTramiteView(tramiteId);
             }
         });
+        verificarRequisitosButton.addActionListener(e -> {
+            int tramiteId = getTramiteSeleccionado();
+            if (tramiteId == -1) return;
 
+            try {
+                TramiteDao dao = new TramiteDao();
+                String estado = dao.obtenerEstado(tramiteId);
+
+                if (!estado.equalsIgnoreCase("pendiente")) {
+                    JOptionPane.showMessageDialog(
+                            this,
+                            "Solo se pueden verificar requisitos\n" +
+                                    "cuando el trámite está PENDIENTE",
+                            "Acción no permitida",
+                            JOptionPane.WARNING_MESSAGE
+                    );
+                    return;
+                }
+
+                new RequisitosView(tramiteId);
+
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Error al verificar requisitos");
+                ex.printStackTrace();
+            }
+        });
 
         registrarExámentButton.addActionListener(e -> {
             try {

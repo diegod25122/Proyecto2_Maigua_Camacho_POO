@@ -31,8 +31,8 @@ public class MenuAdminView extends JFrame {
                 lblImagen,
 
                 "/matriculacion/app/Main/util/Imagenes/admin.png",
-                120,
-                120
+                200,
+                200
         );
     }
     public MenuAdminView(String nombre, String rol) {
