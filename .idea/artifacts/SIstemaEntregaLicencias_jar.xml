@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="SIstemaEntregaLicencias:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/SIstemaEntregaLicencias_jar</output-path>
+    <root id="archive" name="SIstemaEntregaLicencias.jar">
+      <element id="module-output" name="SIstemaEntregaLicencias" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/jcalendar-1.4/lib/junit-4.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/jcalendar-1.4/lib/jcalendar-1.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../postgresql-42.7.8.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/jcalendar-1.4/lib/jgoodies-common-1.2.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/jcalendar-1.4/lib/jgoodies-looks-2.4.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../pdfbox-app-2.0.35.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
